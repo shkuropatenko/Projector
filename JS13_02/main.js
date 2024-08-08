@@ -25,3 +25,15 @@ if (typeof value !== "number") {
     }
   }
 }
+console.log("=================");
+if (typeof value !== "number") {
+  console.log("Таке чуство шо Бог десь наказує нас за шось");
+} else {
+  let i = 1;
+  while (i < value) {
+    if (i % 2 === 0) {
+      console.log(i);
+    }
+    i++;
+  }
+}
