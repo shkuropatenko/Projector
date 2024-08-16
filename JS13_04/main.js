@@ -6,22 +6,19 @@ const userNames = [
   "Рудко Андрій Опанасович",
 ];
 
-let newInitials = userNames.map((name) => {
+const newInitials = userNames.map((name) => {
   let newArrInitials = name.split(" ");
-  let initialsArr = [];
 
-  newArrInitials.map((value) => {
-    return initialsArr.push(value.slice(0, 1).toUpperCase());
+  let initialsArr = newArrInitials.map((value) => {
+    return value.slice(0, 1).toUpperCase() + ".";
   });
 
   return initialsArr;
 });
 
-let initials = newInitials.map((name) => {
+const initials = newInitials.map((name) => {
   return name.join("");
 });
-
-// тут ваш код ...
 
 console.log(initials.sort()); // [ "Г.П.А.", "П.О.І.", "Р.А.О."]
 
@@ -36,41 +33,16 @@ const userNames2 = [
   "Антон",
   "Олена",
 ];
-let filteredNames = userNames2.filter((name) => {
-  let newArr = [];
-  if (
-    name.slice(0, 1) === "А" ||
-    name.slice(0, 1) === "Е" ||
-    name.slice(0, 1) === "Є" ||
-    name.slice(0, 1) === "И" ||
-    name.slice(0, 1) === "І" ||
-    name.slice(0, 1) === "Ї" ||
-    name.slice(0, 1) === "О" ||
-    name.slice(0, 1) === "У" ||
-    name.slice(0, 1) === "Ю" ||
-    name.slice(0, 1) === "Я"
-  ) {
-    return newArr.push(name);
-  }
-  // return newArr;
+const vowels = ["А", "Е", "Є", "И", "І", "Ї", "О", "У", "Ю", "Я"];
+const filteredNames = userNames2.filter((name) => {
+  return vowels.includes(name[0]);
 });
 
-let filteredNames2 = (name) => {
-  let newArr = [];
-  for (let i = 0; i < name.length; i++) {
-    if (
-      name[i].slice(0, 1) === "А" ||
-      name[i].slice(0, 1) === "Е" ||
-      name[i].slice(0, 1) === "Є" ||
-      name[i].slice(0, 1) === "И" ||
-      name[i].slice(0, 1) === "І" ||
-      name[i].slice(0, 1) === "Ї" ||
-      name[i].slice(0, 1) === "О" ||
-      name[i].slice(0, 1) === "У" ||
-      name[i].slice(0, 1) === "Ю" ||
-      name[i].slice(0, 1) === "Я"
-    ) {
-      newArr.push(name[i]);
+const filteredNames2 = () => {
+  const newArr = [];
+  for (let i = 0; i < userNames2.length; i++) {
+    if (vowels.includes(userNames2[i][0])) {
+      newArr.push(userNames2[i]);
     }
   }
   return newArr;
@@ -80,7 +52,7 @@ console.log(filteredNames); // ['Емма', 'Юстин', 'Ілля', 'Яна', 
 console.log(filteredNames2(userNames2)); // ['Емма', 'Юстин', 'Ілля', 'Яна', 'Антон', 'Олена']
 
 const currentMaxValue = 4589;
-let reverseMaxValue = Number(
+const reverseMaxValue = Number(
   currentMaxValue.toString().split("").reverse().join("")
 );
 
@@ -88,7 +60,7 @@ console.log(reverseMaxValue); // 9854
 console.log(typeof reverseMaxValue); // 'number'
 
 const resultsArray = [1, 2, [3, [4]]];
-let productOfArray = resultsArray
+const productOfArray = resultsArray
   .flat(Infinity)
   .reduce((acc, value) => acc * value, 1);
 
