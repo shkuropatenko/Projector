@@ -1,6 +1,10 @@
 "use strict";
 
-function durationBetweenDates(startDate, endDate, dimension) {
+function durationBetweenDates(
+  startDate = "07 Aug 1885",
+  endDate = "03 Aug 1955",
+  dimension = "days"
+) {
   const diffInMs = new Date(endDate) - new Date(startDate);
   let result = null;
 
@@ -18,7 +22,7 @@ function durationBetweenDates(startDate, endDate, dimension) {
       result = diffInMs / (1000 * 60 * 60 * 24);
   }
 
-  return Math.abs(result);
+  return Math.abs(result.toFixed());
 }
 
 console.log(durationBetweenDates("02 Aug 1985", "03 Aug 1985", "seconds")); // поверне '86400 seconds'
@@ -35,7 +39,7 @@ function optimizer(data) {
   const keyObj = Object.entries(data).map(([key, value]) => {
     return [key.toLowerCase(), Number(value).toFixed(2)];
   });
-  console.log(keyObj);
+
   return Object.fromEntries(keyObj);
 }
 
