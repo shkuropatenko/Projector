@@ -5,6 +5,7 @@ function recursiveOddSumTo(number) {
   }
 
   if (number % 2 !== 0) {
+    console.log(number + recursiveOddSumTo(number - 1), "*");
     return number + recursiveOddSumTo(number - 1);
   }
 
