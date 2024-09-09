@@ -1,7 +1,6 @@
 "use strict";
 
 const body = document.querySelector("body");
-const form = document.querySelector("form");
 const btn = document.querySelector("button");
 const text = document.createElement("p");
 
