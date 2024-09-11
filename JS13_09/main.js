@@ -4,45 +4,46 @@ const body = document.querySelector("body");
 const btn = document.querySelector("button");
 const text = document.createElement("p");
 
-btn.addEventListener("click", (event) => {
-  event.preventDefault();
-
+function getFormatedDate() {
   const date = new Date();
-  const formattedDate = `${
-    date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
-  }-${
+
+  return `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}-${
     date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
   }-${date.getFullYear()} ${date.getHours()}:${
     date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
   }:${date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds()}`;
+}
+
+function turnOn() {
+  btn.textContent = "Turn off";
+  localStorage.setItem("btnText", JSON.stringify(btn.textContent));
+
+  text.textContent = `Last turn off: ${getFormatedDate()}`;
+  localStorage.setItem("tag", JSON.stringify(text.textContent));
+
+  body.style.backgroundColor = "#fff";
+  localStorage.setItem("bgColor", JSON.stringify(body.style.backgroundColor));
+}
+
+function turnOff() {
+  btn.textContent = "Turn on";
+  localStorage.setItem("btnText", JSON.stringify(btn.textContent));
+
+  text.textContent = `Last turn on: ${getFormatedDate()}`;
+  localStorage.setItem("tag", JSON.stringify(text.textContent));
+
+  body.style.backgroundColor = "#ccc";
+  localStorage.setItem("bgColor", JSON.stringify(body.style.backgroundColor));
+}
+
+btn.addEventListener("click", (event) => {
+  event.preventDefault();
 
   if (btn.innerText === "Turn off") {
     btn.after(text);
-    localStorage.setItem(
-      "btnText",
-      JSON.stringify((btn.textContent = "Turn on"))
-    );
-    localStorage.setItem(
-      "tag",
-      JSON.stringify((text.textContent = `Last turn on: ${formattedDate}`))
-    );
-    localStorage.setItem(
-      "bgColor",
-      JSON.stringify((body.style.backgroundColor = "#ccc"))
-    );
+    turnOff();
   } else {
-    localStorage.setItem(
-      "btnText",
-      JSON.stringify((btn.textContent = "Turn off"))
-    );
-    localStorage.setItem(
-      "tag",
-      JSON.stringify((text.textContent = `Last turn off: ${formattedDate}`))
-    );
-    localStorage.setItem(
-      "bgColor",
-      JSON.stringify((body.style.backgroundColor = "#fff"))
-    );
+    turnOn();
   }
 });
 
