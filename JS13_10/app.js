@@ -132,7 +132,6 @@ function removeTask(event) {
   if (event.target.classList.contains("button-delete")) {
     const li = event.target.closest(".task"); // Знаходимо батьківський елемент (задачу)
     const tasks = JSON.parse(getTasksFromLocalStorage()); // Отримуємо задачі з LocalStorage
-    console.log(tasks);
     // Фільтруємо задачі, залишаючи лише ті, які не мають індексу видаленої задачі
     const filteredTasks = tasks.filter((task) => {
       return task.id.toString() !== li.getAttribute("data-id");
@@ -148,28 +147,22 @@ function changeTask(event) {
   if (event.target.classList.contains("button-edit")) {
     const li = event.target.closest(".task"); // Знаходимо батьківський елемент (задачу)
     const tasks = JSON.parse(getTasksFromLocalStorage()); // Отримуємо задачі з LocalStorage
-    // Фільтруємо задачі, залишаючи лише ті, які не мають індексу видаленої задачі
-    const filteredTasks = tasks.filter((task) => {
-      if (task.id.toString() === li.getAttribute("data-id")) {
+
+    const taskId = li.getAttribute("data-id");
+    let taskValue = li.firstChild.textContent;
+    // prompt("Edit task", taskValue);
+    const editedValue = prompt("Edit task", taskValue);
+    const filteredTasks = tasks.map((task) => {
+      if (task.id === Number(taskId)) {
+        task.title = editedValue;
+        taskValue = editedValue;
+        return task;
+      } else {
         return task;
       }
     });
 
-    const taskEdited = prompt(filteredTasks[0].title);
-    filteredTasks[0].title = taskEdited;
-
-    const taskIndex = tasks.findIndex(
-      (task) => task.id === filteredTasks[0].id
-    );
-
-    if (taskIndex !== -1) {
-      tasks[taskIndex] = {
-        // ...tasks[taskIndex],
-        ...filteredTasks,
-      };
-    }
-
-    setTaskToLocalStorage(...tasks);
+    setTasksToLocalStorage(filteredTasks);
   }
 }
 
