@@ -150,12 +150,11 @@ function changeTask(event) {
 
     const taskId = li.getAttribute("data-id");
     let taskValue = li.firstChild.textContent;
-    // prompt("Edit task", taskValue);
     const editedValue = prompt("Edit task", taskValue);
     const filteredTasks = tasks.map((task) => {
       if (task.id === Number(taskId)) {
         task.title = editedValue;
-        taskValue = editedValue;
+
         return task;
       } else {
         return task;
@@ -163,6 +162,8 @@ function changeTask(event) {
     });
 
     setTasksToLocalStorage(filteredTasks);
+    if (!editedValue) return taskValue;
+    li.firstChild.textContent = editedValue;
   }
 }
 
