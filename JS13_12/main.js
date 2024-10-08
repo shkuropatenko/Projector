@@ -76,4 +76,4 @@ promise
 // 2
 // 4
 // undefined
-// undefined
+// 8
